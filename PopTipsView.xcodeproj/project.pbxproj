@@ -14,6 +14,10 @@
 		883100211ECAB1730018F58F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8831001F1ECAB1730018F58F /* LaunchScreen.storyboard */; };
 		8831002C1ECAB1740018F58F /* PopTipsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831002B1ECAB1740018F58F /* PopTipsViewTests.swift */; };
 		883100371ECAB1740018F58F /* PopTipsViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883100361ECAB1740018F58F /* PopTipsViewUITests.swift */; };
+		883100451ECAB1990018F58F /* TipsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883100441ECAB1990018F58F /* TipsManager.swift */; };
+		883100471ECAB1DF0018F58F /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883100461ECAB1DF0018F58F /* TriangleView.swift */; };
+		883100491ECAB26E0018F58F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883100481ECAB26E0018F58F /* Constants.swift */; };
+		8831004B1ECAB2AE0018F58F /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831004A1ECAB2AE0018F58F /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		883100321ECAB1740018F58F /* PopTipsViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopTipsViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		883100361ECAB1740018F58F /* PopTipsViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopTipsViewUITests.swift; sourceTree = "<group>"; };
 		883100381ECAB1740018F58F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		883100441ECAB1990018F58F /* TipsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipsManager.swift; sourceTree = "<group>"; };
+		883100461ECAB1DF0018F58F /* TriangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
+		883100481ECAB26E0018F58F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8831004A1ECAB2AE0018F58F /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,10 @@
 			children = (
 				883100161ECAB1730018F58F /* AppDelegate.swift */,
 				883100181ECAB1730018F58F /* ViewController.swift */,
+				883100441ECAB1990018F58F /* TipsManager.swift */,
+				883100461ECAB1DF0018F58F /* TriangleView.swift */,
+				883100481ECAB26E0018F58F /* Constants.swift */,
+				8831004A1ECAB2AE0018F58F /* Extension.swift */,
 				8831001A1ECAB1730018F58F /* Main.storyboard */,
 				8831001D1ECAB1730018F58F /* Assets.xcassets */,
 				8831001F1ECAB1730018F58F /* LaunchScreen.storyboard */,
@@ -262,7 +274,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				883100491ECAB26E0018F58F /* Constants.swift in Sources */,
 				883100191ECAB1730018F58F /* ViewController.swift in Sources */,
+				883100451ECAB1990018F58F /* TipsManager.swift in Sources */,
+				8831004B1ECAB2AE0018F58F /* Extension.swift in Sources */,
+				883100471ECAB1DF0018F58F /* TriangleView.swift in Sources */,
 				883100171ECAB1730018F58F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

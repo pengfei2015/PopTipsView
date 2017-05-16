@@ -10,16 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let manager = TipsManager.manager
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        manager.show(message: "测试测试", at: CGPoint(x: 123, y: 123))
+        manager.contentInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        manager.cornerRadius = 0
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        let point = touches.first?.location(in: view) ?? CGPoint.zero
+        manager.show(message: "我是小提示啊，小提示", at: point)
+        
     }
-
-
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let point = touches.first?.location(in: view) ?? CGPoint.zero
+        manager.point = point
+    }
 }
 

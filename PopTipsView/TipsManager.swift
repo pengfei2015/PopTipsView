@@ -8,8 +8,9 @@
 
 import UIKit
 
-class TipsManager: NSObject {
-    static let manager = TipsManager()
+class TipsController: NSObject {
+    
+    static let share = TipsController()
     
     var triangleDiretion = Direction.down
     var point = CGPoint.zero {
@@ -25,6 +26,9 @@ class TipsManager: NSObject {
         }
     }
     
+    var didTapedTipsView: ((Void) -> Void)?
+    
+    
     var cornerRadius: CGFloat = 5 {
         didSet {
             contentView.layer.cornerRadius = cornerRadius
@@ -37,39 +41,42 @@ class TipsManager: NSObject {
         return triangleView
     }()
     
-    private lazy var contentView: UIView = {
-        let contentView = UIView(frame: CGRect.zero)
+    private lazy var contentView: UIControl = {
+        let contentView = UIControl(frame: CGRect.zero)
         contentView.backgroundColor = UIColor.black
         contentView.layer.cornerRadius = self.cornerRadius
         contentView.layer.masksToBounds = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapedContentView(_:)))
-        contentView.addGestureRecognizer(tap)
+        contentView.addTarget(self, action: #selector(didTapedContentView), for: .touchUpInside)
         return contentView
     }()
     
     private lazy var overlayView: UIButton = {
-        let overlayView = UIButton(frame: kScreenBounds)
+        let overlayView = UIButton(frame: self.inView.bounds)
         overlayView.addTarget(self, action: #selector(didClickedOverlayView), for: .touchUpInside)
         return overlayView
     }()
     
+    private lazy var inView: UIView = window
     
-    func show(message: String, at point: CGPoint, haveOverlayView: Bool = false) {
+    func show(message: String, at point: CGPoint, in view: UIView? = nil, masked: Bool = false) {
         let labelWidth = message.width(with: UIFont.systemFont(ofSize: 14))
         let messagelabel = UILabel(frame: CGRect(x: 0, y: 0, width: labelWidth, height: UIFont.systemFont(ofSize: 14).lineHeight))
         messagelabel.text = message
         messagelabel.textColor = UIColor.white
         messagelabel.font = UIFont.systemFont(ofSize: 14)
-        show(customView: messagelabel, at: point, haveOverlayView: haveOverlayView)
+        show(customView: messagelabel, at: point, in: view)
     }
     
-    func show(customView: UIView, at point: CGPoint, haveOverlayView: Bool = false) {
+    func show(customView: UIView, at point: CGPoint, in view: UIView? = nil, masked: Bool = false) {
         remove()
-        if haveOverlayView {
-            window.addSubview(overlayView)
+        if let view = view {
+            inView = view
         }
-        window.addSubview(triangleView)
-        window.addSubview(contentView)
+        if masked {
+            inView.addSubview(overlayView)
+        }
+        inView.addSubview(triangleView)
+        inView.addSubview(contentView)
         contentView.addSubview(customView)
         self.point = point
         self.customView = customView
@@ -92,7 +99,7 @@ class TipsManager: NSObject {
         var triangleX = point.x - triangleSize.width * 0.5
         if triangleX < 0 { triangleX = max(0, triangleX) }
         triangleX = max(0, triangleX)
-        triangleX = min(triangleX, kScreenWidth - triangleSize.width)
+        triangleX = min(triangleX, inView.frame.size.width - triangleSize.width)
         switch direction {
         case .up:
             triangleView.direction = .up
@@ -108,11 +115,11 @@ class TipsManager: NSObject {
     private func adjustContentView(with direction: Direction) {
         let contentViewWidth = customView.frame.size.width + contentInsets.left + contentInsets.right
         let contentHeight = customView.frame.size.height + contentInsets.top + contentInsets.bottom
-        let contentX = triangleView.frame.origin.x / (kScreenWidth - triangleSize.width) * (kScreenWidth - contentViewWidth)
+        let contentX = triangleView.frame.origin.x / (inView.frame.size.width - triangleSize.width) * (inView.frame.size.width - contentViewWidth)
         switch direction {
         case .up:
             contentView.frame = CGRect(x: contentX, y: triangleView.frame.maxY, width: contentViewWidth, height: contentHeight)
-            if contentView.frame.maxY > kScreenHeight {
+            if contentView.frame.maxY > inView.frame.size.height {
                 adjustSubviews(with: .down)
             }
         case .down:
@@ -130,8 +137,8 @@ class TipsManager: NSObject {
         remove()
     }
     
-    @objc private func didTapedContentView(_ tap: UITapGestureRecognizer) {
-        remove()
+    @objc private func didTapedContentView() {
+        didTapedTipsView?()
     }
 
 }
